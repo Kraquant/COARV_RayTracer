@@ -2,30 +2,29 @@
 #include <test.h>
 #include <fstream>
 
+#include <vec3.h>
+#include <color.h>
+
 int main() {
-    std::ofstream renderImage("render.ppm");
 
-    int nx = 200;
-    int ny = 100;
 
-    renderImage << "P3\n" << nx << " " << ny << "\n255\n";
+    const int image_width = 960;
+    const int image_height = 720;
+    
+    std::ofstream render_image("myRender.ppm");
 
-    for (int j  = ny-1; j>=0; j--){
+    render_image << "P3\n" << image_width << " " << image_height << "\n255\n";
+
+    for (int j  = image_height-1; j>=0; j--){
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
-        for (int i = 0; i <nx; i++) {
-            float r = float(i) / float(nx);
-            float g = float(j) / float (ny);
-            float b = 0.2f;
-
-            int ir = int(255.99*r);
-            int ig = int(255.99*g);
-            int ib = int(255.99*b);
-            renderImage << ir << " " << ig << " " << ib << "\n";
+        for (int i = 0; i < image_width; i++) {
+            color pixel_color(double(i)/(image_width-1), double(j)/(image_height-1), 0.25);
+            write_color(render_image, pixel_color);
         }
     }
 
+    render_image.close();
     std::cerr << "\nDone.\n";
-    renderImage.close();
     system("pause");
     return 0;
 }
