@@ -1,9 +1,9 @@
 #include <iostream>
-#include <test.h>
 #include <fstream>
 
 #include <vec3.h>
 #include <color.h>
+#include <ray.h>
 
 int main() {
 
