@@ -4,28 +4,16 @@
 #include <vec3.h>
 #include <color.h>
 #include <ray.h>
-
-bool hit_sphere(const point3& center, double radius, const ray& r) {
-    //Si le rayon est donne par P(t) = A + t*B
-    //On cherche a resoudre l'equation ou il existe t tel que:
-    // norm(P(t) - C) <= r
-    // soit (P(t)-C).(P(t)-C) <= r
-    // soit un equation du second degré
-    
-    vec3 oc = r.origin() - center;
-
-    auto a = dot(r.direction(), r.direction());
-    auto b = 2*dot(r.direction(), oc);
-    auto c = oc.length_squared() - radius*radius;
-
-    auto discriminant = b*b - 4*a*c;
-    return discriminant > 0; //Une ou deux solution: le rayon frole ou traverse la boule
-}
+#include <sphere.h>
 
 color ray_color(const ray& r) { //Returns the color of the background (a gradient)
 
     //Ajout de l'intersection à la boule:
-    if (hit_sphere(point3(0,0,-1), 0.5, r)) return color(1, 0, 0);
+    // auto t = hit_sphere(point3(0, 0, -1), 0.5, r);
+    // if (t>0.0) {
+    //     vec3 N = unit_vector(r.at(t)- vec3(0, 0, -1)); //Vecteur normal a la sphere au point d'intersection
+    //     return 0.5*color(N.x() + 1, N.y() + 1, N.z() +1); //On se ramène a [0,1]
+    // }
 
     //Gradient du ciel
     vec3 unit_direction = unit_vector(r.direction());
