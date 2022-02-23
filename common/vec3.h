@@ -74,6 +74,19 @@ class vec3 {
         return randVec;
     }
 
+    inline static vec3 random_in_hemisphere(const vec3& normal) {
+        vec3 in_unit_sphere = random_in_unit_sphere();
+        double dotProduct = in_unit_sphere.x()*normal.x() + in_unit_sphere.y()*normal.y() + in_unit_sphere.z()*normal.z();
+        if (dotProduct > 0.0) // In the same hemisphere as the normal
+        {
+            return in_unit_sphere;
+        }
+        else
+        {
+            return -in_unit_sphere;
+        }
+    }
+
     public:
     double e[3];
 };
