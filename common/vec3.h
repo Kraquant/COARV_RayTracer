@@ -57,12 +57,22 @@ class vec3 {
     }
 
     inline static vec3 random_in_unit_sphere(){
-    while(true) {
-        auto p = vec3::random(-1, 1);
-        if (p.length_squared() >= 1) continue;
-        return p;
+        while(true) {
+            auto p = vec3::random(-1, 1);
+            if (p.length_squared() >= 1) continue;
+            return p;
+        }
     }
-}
+
+    inline static vec3 random_unit_vector(){
+        vec3 randVec = vec3::random_in_unit_sphere();
+        randVec.e[0] *= 1/randVec.length();
+        randVec.e[1] *= 1/randVec.length();
+        randVec.e[2] *= 1/randVec.length();
+
+
+        return randVec;
+    }
 
     public:
     double e[3];
