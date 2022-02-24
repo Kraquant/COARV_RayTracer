@@ -100,6 +100,14 @@ class vec3 {
         }
     }
 
+    inline static vec3 random_in_unit_disk() {
+        while(true) {
+            auto p = vec3(random_double(-1, 1), random_double(-1, 1), 0);
+            if (p.length_squared() >= 1) continue;
+            return p;
+        }
+    }
+
     bool near_zero() const {
         //Return true if the vector is close to zero in all dimensions.
         const auto s = 1e-8;
