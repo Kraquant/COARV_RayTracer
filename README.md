@@ -1,5 +1,5 @@
 # COARV_RayTracer
-Créé par LESKERPIT Morgan
+Créé par LESKERPIT Morgan et PARES Luc
 Etudiant ingénieur en option réalité virtuelle à l'Ecole Centrale de Nantes
 
 
